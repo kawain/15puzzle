@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>15パズル</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: blanchedalmond;
+        }
+
+        a {
+            color: blanchedalmond;
+        }
+
+        .canvas-container {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        canvas {
+            background-color: rgb(233, 221, 221);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="canvas-container my-2">
+        <h1 class="text-center h3">
+            <a href="https://ja.wikipedia.org/wiki/15%E3%83%91%E3%82%BA%E3%83%AB">15パズル</a>
+        </h1>
+        <p class="text-center">操作方法：⬆ ➡ ⬇ ⬅ または W A S D</p>
+        <p class="text-center"><a class="btn btn-warning" href="./index.html">シャッフルする</a></p>
+        <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
