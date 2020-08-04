@@ -1,5 +1,7 @@
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
+const start = document.getElementById("start")
+
 // セル正方形のサイズ
 const cellSize = 100
 // 画面縦のセル数
@@ -12,6 +14,8 @@ const screen = Array(screenH)
 const emptyCell = 16
 // 空の座標
 const emptyCellPoint = {}
+// 移動量
+let moveCount = 0
 
 function init() {
     // 配列に代入
@@ -29,20 +33,20 @@ function init() {
 }
 
 function shuffle() {
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 1000; i++) {
         let n = Math.floor(Math.random() * 4)
         switch (n) {
             case 0:
-                swap(1, 0)
+                swap(1, 0, true)
                 break
             case 1:
-                swap(0, 1)
+                swap(0, 1, true)
                 break
             case 2:
-                swap(-1, 0)
+                swap(-1, 0, true)
                 break
             case 3:
-                swap(0, -1)
+                swap(0, -1, true)
                 break
         }
     }
@@ -66,12 +70,18 @@ function draw() {
         }
     }
 
-    if (gameClear()) {
+    if (moveCount > 0) {
+        start.innerText = moveCount
+    }
+
+    if (moveCount > 0 && gameClear()) {
+        start.disabled = false
+        start.innerText = `スタート ${moveCount}`
         alert("クリア！")
     }
 }
 
-function swap(row, col) {
+function swap(row, col, isShuffle = false) {
     const row1 = emptyCellPoint.row + row
     const col1 = emptyCellPoint.col + col
     // 範囲チェック
@@ -83,7 +93,10 @@ function swap(row, col) {
     emptyCellPoint.row = row1
     emptyCellPoint.col = col1
 
-    draw()
+    if (!isShuffle) {
+        moveCount++
+        draw()
+    }
 }
 
 function gameClear() {
@@ -115,13 +128,14 @@ document.addEventListener("keydown", (e) => {
     }
 })
 
-function main() {
-    init()
+start.addEventListener("click", (e) => {
+    e.target.disabled = true
+    start.innerText = `スタート`
+    e.target.blur()
+    moveCount = 0
     shuffle()
     draw()
-}
+})
 
-main()
-
-
-
+init()
+draw()
